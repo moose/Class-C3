@@ -233,7 +233,7 @@ __END__
 
 =head1 NAME
 
-Class::C3 - A pragma to use the C3 method resolution order algortihm
+Class::C3 - A pragma to use the C3 method resolution order algorithm
 
 =head1 SYNOPSIS
 
