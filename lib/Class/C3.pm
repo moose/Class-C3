@@ -238,22 +238,22 @@ Class::C3 - A pragma to use the C3 method resolution order algorithm
 =head1 SYNOPSIS
 
     # NOTE - DO NOT USE Class::C3 directly as a user, use MRO::Compat instead!
-    package A;
+    package ClassA;
     use Class::C3;
     sub hello { 'A::hello' }
 
-    package B;
-    use base 'A';
+    package ClassB;
+    use base 'ClassA';
     use Class::C3;
 
-    package C;
-    use base 'A';
+    package ClassC;
+    use base 'ClassA';
     use Class::C3;
 
     sub hello { 'C::hello' }
 
-    package D;
-    use base ('B', 'C');
+    package ClassD;
+    use base ('ClassB', 'ClassC');
     use Class::C3;
 
     # Classic Diamond MI pattern
@@ -269,12 +269,12 @@ Class::C3 - A pragma to use the C3 method resolution order algorithm
     # (formerly called in INIT)
     Class::C3::initialize();
 
-    print join ', ' => Class::C3::calculateMRO('Diamond_D') # prints D, B, C, A
+    print join ', ' => Class::C3::calculateMRO('ClassD'); # prints ClassD, ClassB, ClassC, ClassA
 
-    print D->hello() # prints 'C::hello' instead of the standard p5 'A::hello'
+    print ClassD->hello(); # prints 'C::hello' instead of the standard p5 'A::hello'
 
-    D->can('hello')->();          # can() also works correctly
-    UNIVERSAL::can('D', 'hello'); # as does UNIVERSAL::can()
+    ClassD->can('hello')->();          # can() also works correctly
+    UNIVERSAL::can('ClassD', 'hello'); # as does UNIVERSAL::can()
 
 =head1 DESCRIPTION
 
