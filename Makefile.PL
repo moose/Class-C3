@@ -16,12 +16,11 @@ test_requires 'Test::More' => '0.47';
 requires 'Algorithm::C3' => '0.07';
 requires 'Scalar::Util'  => '0';
 
-# XS not interesting after mro is cored
-requires 'Class::C3::XS'  => '0.13'
-  if $] < 5.009_005 and can_xs();
-
-test_requires 'Devel::Hide' => 0
-  if is_smoker();
+if ($] < 5.009_005) {
+  # XS not interesting after mro is cored
+  requires 'Class::C3::XS'  => '0.13' if can_xs();
+  test_requires 'Devel::Hide' => 0 if is_smoker();
+}
 
 if($Module::Install::AUTHOR) {
   # compiler detection, goes into META
