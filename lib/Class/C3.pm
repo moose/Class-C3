@@ -44,7 +44,7 @@ BEGIN {
 # this:
 #
 #   $MRO{$class} = {
-#      MRO => [ <class precendence list> ],
+#      MRO => [ <class precedence list> ],
 #      methods => {
 #          orig => <original location of method>,
 #          code => \&<ref to original method>
@@ -290,13 +290,13 @@ to using this implementation on older perls.
 
 C3 is the name of an algorithm which aims to provide a sane method resolution order under multiple
 inheritance. It was first introduced in the langauge Dylan (see links in the L<SEE ALSO> section),
-and then later adopted as the prefered MRO (Method Resolution Order) for the new-style classes in
+and then later adopted as the preferred MRO (Method Resolution Order) for the new-style classes in
 Python 2.3. Most recently it has been adopted as the 'canonical' MRO for Perl 6 classes, and the
 default MRO for Parrot objects as well.
 
 =head2 How does C3 work.
 
-C3 works by always preserving local precendence ordering. This essentially means that no class will
+C3 works by always preserving local precedence ordering. This essentially means that no class will
 appear before any of its subclasses. Take the classic diamond inheritance pattern for instance:
 
      <A>
@@ -350,7 +350,7 @@ Given a C<$class> this will return an array of class names in the proper C3 meth
 
 =item B<initialize>
 
-This B<must be called> to initalize the C3 method dispatch tables, this module B<will not work> if
+This B<must be called> to initialize the C3 method dispatch tables, this module B<will not work> if
 you do not do this. It is advised to do this as soon as possible B<after> loading any classes which
 use C3. Here is a quick code example:
 
@@ -455,7 +455,7 @@ But there are still caveats, so here goes ...
 
 =item Use of C<SUPER::>.
 
-The idea of C<SUPER::> under multiple inheritance is ambigious, and generally not recomended anyway.
+The idea of C<SUPER::> under multiple inheritance is ambiguous, and generally not recomended anyway.
 However, its use in conjuntion with this module is very much not recommended, and in fact very
 discouraged. The recommended approach is to instead use the supplied C<next::method> feature, see
 more details on its usage above.

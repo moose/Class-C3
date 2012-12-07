@@ -83,7 +83,7 @@ Class::C3::next - Pure-perl next::method and friends
 =head1 DESCRIPTION
 
 This module is used internally by L<Class::C3> when
-neccesary, and shouldn't be used (or required in
+necessary, and shouldn't be used (or required in
 distribution dependencies) directly.  It
 defines C<next::method>, C<next::can>, and
 C<maybe::next::method> in pure perl.
