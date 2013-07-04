@@ -137,7 +137,7 @@ sub _calculate_method_dispatch_table {
     my %methods;
     # NOTE:
     # we do @MRO[1 .. $#MRO] here because it
-    # makes no sense to interogate the class
+    # makes no sense to interrogate the class
     # which you are calculating for.
     foreach my $local (@MRO[1 .. $#MRO]) {
         # if overload has tagged this module to
@@ -146,7 +146,7 @@ sub _calculate_method_dispatch_table {
         $has_overload_fallback = ${"${local}::()"}
             if !defined $has_overload_fallback && defined ${"${local}::()"};
         foreach my $method (grep { defined &{"${local}::$_"} } keys %{"${local}::"}) {
-            # skip if already overriden in local class
+            # skip if already overridden in local class
             next unless !defined *{"${class}::$method"}{CODE};
             $methods{$method} = {
                 orig => "${local}::$method",
@@ -289,7 +289,7 @@ to using this implementation on older perls.
 =head2 What is C3?
 
 C3 is the name of an algorithm which aims to provide a sane method resolution order under multiple
-inheritance. It was first introduced in the langauge Dylan (see links in the L<SEE ALSO> section),
+inheritance. It was first introduced in the language Dylan (see links in the L<SEE ALSO> section),
 and then later adopted as the preferred MRO (Method Resolution Order) for the new-style classes in
 Python 2.3. Most recently it has been adopted as the 'canonical' MRO for Perl 6 classes, and the
 default MRO for Parrot objects as well.
@@ -309,7 +309,7 @@ The standard Perl 5 MRO would be (D, B, A, C). The result being that B<A> appear
 though B<C> is the subclass of B<A>. The C3 MRO algorithm however, produces the following MRO
 (D, B, C, A), which does not have this same issue.
 
-This example is fairly trival, for more complex examples and a deeper explaination, see the links in
+This example is fairly trivial, for more complex examples and a deeper explanation, see the links in
 the L<SEE ALSO> section.
 
 =head2 How does this module work?
@@ -333,12 +333,12 @@ think that code looks much nicer like this:
   package MyClass;
   use c3;
 
-The the more clunky:
+This is more clunky:
 
   package MyClass;
   use Class::C3;
 
-But hey, it's your choice, thats why it is optional.
+But hey, it's your choice, that's why it is optional.
 
 =head1 FUNCTIONS
 
@@ -370,7 +370,7 @@ use C3. Here is a quick code example:
 This function used to be called automatically for you in the INIT phase of the perl compiler, but
 that lead to warnings if this module was required at runtime. After discussion with my user base
 (the L<DBIx::Class> folks), we decided that calling this in INIT was more of an annoyance than a
-convience. I apologize to anyone this causes problems for (although i would very suprised if I had
+convenience. I apologize to anyone this causes problems for (although I would be very surprised if I had
 any other users other than the L<DBIx::Class> folks). The simplest solution of course is to define
 your own INIT method which calls this function.
 
@@ -455,8 +455,8 @@ But there are still caveats, so here goes ...
 
 =item Use of C<SUPER::>.
 
-The idea of C<SUPER::> under multiple inheritance is ambiguous, and generally not recomended anyway.
-However, its use in conjuntion with this module is very much not recommended, and in fact very
+The idea of C<SUPER::> under multiple inheritance is ambiguous, and generally not recommended anyway.
+However, its use in conjunction with this module is very much not recommended, and in fact very
 discouraged. The recommended approach is to instead use the supplied C<next::method> feature, see
 more details on its usage above.
 
@@ -465,12 +465,12 @@ more details on its usage above.
 It is the author's opinion that changing C<@ISA> at runtime is pure insanity anyway. However, people
 do it, so I must caveat. Any changes to the C<@ISA> will not be reflected in the MRO calculated by this
 module, and therefore probably won't even show up. If you do this, you will need to call C<reinitialize>
-in order to recalulate B<all> method dispatch tables. See the C<reinitialize> documentation and an example
+in order to recalculate B<all> method dispatch tables. See the C<reinitialize> documentation and an example
 in F<t/20_reinitialize.t> for more information.
 
 =item Adding/deleting methods from class symbol tables.
 
-This module calculates the MRO for each requested class by interogating the symbol tables of said classes.
+This module calculates the MRO for each requested class by interrogating the symbol tables of said classes.
 So any symbol table manipulation which takes place after our INIT phase is run will not be reflected in
 the calculated MRO. Just as with changing the C<@ISA>, you will need to call C<reinitialize> for any
 changes you make to take effect.
