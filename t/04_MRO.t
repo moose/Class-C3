@@ -3,12 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
-
-BEGIN {
-    use lib 'opt', '../opt', '..';
-    use_ok('c3');
-}
+use Test::More tests => 1;
 
 =pod
 
@@ -38,36 +33,36 @@ example taken from: L<http://gauss.gwydiondylan.org/books/drm/drm_50.html>
 
 {
     package Object;    
-    use c3;
+    use Class::C3;
     
     package LifeForm;
-    use c3;
+    use Class::C3;
     use base 'Object';
     
     package Sentient;
-    use c3;
+    use Class::C3;
     use base 'LifeForm';
     
     package BiPedal;
-    use c3;    
+    use Class::C3;    
     use base 'LifeForm';
     
     package Intelligent;
-    use c3;    
+    use Class::C3;    
     use base 'Sentient';
     
     package Humanoid;
-    use c3;    
+    use Class::C3;    
     use base 'BiPedal';
     
     package Vulcan;
-    use c3;    
+    use Class::C3;    
     use base ('Intelligent', 'Humanoid');
 }
 
 Class::C3::initialize();
 
 is_deeply(
-    [ c3::calculateMRO('Vulcan') ],
+    [ Class::C3::calculateMRO('Vulcan') ],
     [ qw(Vulcan Intelligent Sentient Humanoid BiPedal LifeForm Object) ],
     '... got the right MRO for the Vulcan Dylan Example');  

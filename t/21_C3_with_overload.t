@@ -3,11 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 9;
-
-BEGIN {
-    use_ok('Class::C3');
-}
+use Test::More tests => 8;
 
 {
     package BaseTest;

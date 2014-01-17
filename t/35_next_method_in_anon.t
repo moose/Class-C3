@@ -3,12 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 3;
-
-BEGIN {
-    use lib 'opt', '../opt', '../blib/lib';    
-    use_ok('c3');
-}
+use Test::More tests => 2;
 
 =pod
 
@@ -19,7 +14,7 @@ anonymous subroutine.
 
 {
     package A;
-    use c3; 
+    use Class::C3; 
 
     sub foo {
       return 'A::foo';
@@ -33,7 +28,7 @@ anonymous subroutine.
 {
     package B;
     use base 'A';
-    use c3; 
+    use Class::C3; 
     
     sub foo {
       my $code = sub {

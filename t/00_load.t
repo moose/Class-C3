@@ -3,12 +3,10 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 2;
 
-BEGIN {
-    use_ok('Class::C3');
-    use_ok('Class::C3::next');
-}
+use Class::C3;
+use Class::C3::next;
 
 if ($] > 5.009_004) {
   ok ($Class::C3::C3_IN_CORE, 'C3 in core');

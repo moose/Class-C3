@@ -3,15 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
-
-BEGIN {
-    use lib 'opt', '../opt', '..';    
-    use_ok('c3');
-    # uncomment this line, and re-run the
-    # test to see the normal p5 dispatch order
-    #$Class::C3::TURN_OFF_C3 = 1;    
-}
+use Test::More tests => 5;
 
 =pod
 
@@ -27,19 +19,19 @@ This tests the classic diamond inheritence pattern.
 
 {
     package Diamond_A;
-    use c3; 
+    use Class::C3; 
     sub hello { 'Diamond_A::hello' }
     sub foo { 'Diamond_A::foo' }       
 }
 {
     package Diamond_B;
     use base 'Diamond_A';
-    use c3;     
+    use Class::C3;     
     sub foo { 'Diamond_B::foo => ' . (shift)->next::method() }       
 }
 {
     package Diamond_C;
-    use c3;    
+    use Class::C3;    
     use base 'Diamond_A';     
 
     sub hello { 'Diamond_C::hello => ' . (shift)->next::method() }
@@ -48,7 +40,7 @@ This tests the classic diamond inheritence pattern.
 {
     package Diamond_D;
     use base ('Diamond_B', 'Diamond_C');
-    use c3; 
+    use Class::C3; 
     
     sub foo { 'Diamond_D::foo => ' . (shift)->next::method() }   
 }

@@ -1,3 +1,3 @@
 package t::lib::B;
-use c3;
+use Class::C3;
 1;

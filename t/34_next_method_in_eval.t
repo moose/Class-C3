@@ -3,12 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
-
-BEGIN {
-    use lib 'opt', '../opt', '..';    
-    use_ok('c3');
-}
+use Test::More tests => 1;
 
 =pod
 
@@ -18,7 +13,7 @@ This tests the use of an eval{} block to wrap a next::method call.
 
 {
     package A;
-    use c3; 
+    use Class::C3; 
 
     sub foo {
       die 'A::foo died';
@@ -29,7 +24,7 @@ This tests the use of an eval{} block to wrap a next::method call.
 {
     package B;
     use base 'A';
-    use c3; 
+    use Class::C3; 
     
     sub foo {
       eval {

@@ -3,14 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 12;
-
-BEGIN {
-    use_ok('Class::C3');
-    # uncomment this line, and re-run the
-    # test to see the normal p5 dispatch order
-    #$Class::C3::TURN_OFF_C3 = 1;
-}
+use Test::More tests => 11;
 
 =pod
 
