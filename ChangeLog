@@ -1,5 +1,7 @@
 Revision history for Perl extension Class::C3.
 
+    - Fix bug in Makefile.PL when ExtUtils::CBuilder not available
+
 0.25 Thu, July 4, 2013
     - Drop compatibility from 5.6.2 to 5.6.0
     - Pod typo fixes (RT#77453, RT#85357)
