@@ -1,5 +1,6 @@
 Revision history for Perl extension Class::C3.
 
+0.26 Tue, Mar 4, 2104
     - Fix bug in Makefile.PL when ExtUtils::CBuilder not available
 
 0.25 Thu, July 4, 2013
