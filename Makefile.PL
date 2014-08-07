@@ -38,6 +38,7 @@ my %WriteMakefileArgs = (
   'AUTHOR' => 'Stevan Little, <stevan@iinteractive.com>',
   'VERSION_FROM' => 'lib/Class/C3.pm',
   'ABSTRACT_FROM' => 'lib/Class/C3.pm',
+  'MIN_PERL_VERSION' => '5.006',
   'CONFIGURE_REQUIRES' => { 'ExtUtils::CBuilder' => 0.27 },
   'PREREQ_PM' => {
     %RUN_DEPS, %OPT_RUN_DEPS,
