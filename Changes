@@ -1,5 +1,7 @@
 Revision history for Perl extension Class::C3.
 
+    - declare minimum perl version of 5.6 in metadata
+
 0.26 Tue, Mar 4, 2104
     - Fix bug in Makefile.PL when ExtUtils::CBuilder not available
 
