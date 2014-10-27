@@ -519,7 +519,7 @@ L<Devel::Cover> was reporting 94.4% overall test coverage earlier in this module
 
 =over 4
 
-=item L<http://www.webcom.com/haahr/dylan/linearization-oopsla96.html>
+=item L<https://web.archive.org/web/20000817033012id_/http://www.webcom.com/haahr/dylan/linearization-oopsla96.html>
 
 =back
 
