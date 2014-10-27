@@ -1,5 +1,8 @@
 Revision history for Perl extension Class::C3.
 
+    - Change link to Dylan paper to use archive.org, as the original link has
+      gone offline (RT#99756).
+
 0.27 - 2014-08-16
     - declare minimum perl version of 5.6 in metadata
 
