@@ -66,7 +66,7 @@ use strict;
 use warnings;
 no warnings 'redefine'; # for 00load.t w/ core support
 
-our $VERSION = '0.24';
+our $VERSION = '0.27';
 
 sub method { (next::method($_[0]) || return)->(@_) }
 
