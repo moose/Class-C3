@@ -1,5 +1,6 @@
 Revision history for Perl extension Class::C3.
 
+0.28 - 2015-04-14
     - Change link to Dylan paper to use archive.org, as the original link has
       gone offline (RT#99756).
 
