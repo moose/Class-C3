@@ -4,12 +4,10 @@
 /MYMETA.*
 /blib
 /build
-/inc
 /pm_to_blib
 /MANIFEST
 /MANIFEST.bak
 /MANIFEST.SKIP
 /Distar
-Debian*
 /Class-C3-*/
 /Class-C3-*.tar.gz
