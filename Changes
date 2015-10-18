@@ -1,5 +1,6 @@
 Revision history for Perl extension Class::C3.
 
+0.29 - 2015-10-18
     - Update compiler detection to use ExtUtils::HasCompiler
 
 0.28 - 2015-04-14
