@@ -1,5 +1,8 @@
 Revision history for Perl extension Class::C3.
 
+    - include ExtUtils::HasCompiler in dist as intended so it doesn't need to
+      be installed
+
 0.29 - 2015-10-18
     - Update compiler detection to use ExtUtils::HasCompiler
 

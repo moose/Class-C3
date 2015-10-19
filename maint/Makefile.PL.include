@@ -7,5 +7,6 @@ use ExtUtils::MakeMaker 6.57_10 ();
 author 'Stevan Little, <stevan@iinteractive.com>';
 
 manifest_include opt => '.pm';
+manifest_include inc => '.pm';
 
 1;
