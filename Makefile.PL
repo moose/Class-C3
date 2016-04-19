@@ -25,13 +25,11 @@ my %META = (
         'perl'          => 5.006,
       },
     },
-    develop   => {
-      requires => { map { $_ => 0 } qw(
-        indirect multidimensional bareword::filehandles
-        Moose Mouse namespace::clean namespace::autoclean
-        MooseX::Types::Common::Numeric
-        Type::Tiny
-      ) },
+    develop => {
+      requires => {
+        'Test::Pod' => 1.14,
+        'Test::Pod::Coverage' => 1.04,
+      },
     },
   },
   resources => {
