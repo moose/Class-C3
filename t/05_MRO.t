@@ -3,19 +3,43 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 1;
 
 BEGIN {
-    use_ok('t::lib::F');
+  package ClassA;
+  use Class::C3;
+}
+BEGIN {
+  package ClassB;
+  use Class::C3;
+}
+BEGIN {
+  package ClassC;
+  use Class::C3;
+}
+BEGIN {
+  package ClassD;
+  use Class::C3;
+  our @ISA = qw(ClassA ClassB);
+}
+BEGIN {
+  package ClassE;
+  use Class::C3;
+  our @ISA = qw(ClassA ClassC);
+}
+BEGIN {
+  package ClassF;
+  use Class::C3;
+  our @ISA = qw(ClassD ClassE);
 }
 
-=pod 
+=pod
 
 From the parrot test t/pmc/object-meths.t
 
- A   B A   E
+ A   B A   C
   \ /   \ /
-   C     D
+   D     E
     \   /
      \ /
       F
@@ -25,7 +49,6 @@ From the parrot test t/pmc/object-meths.t
 Class::C3::initialize();
 
 is_deeply(
-    [ Class::C3::calculateMRO('t::lib::F') ],
-    [ qw(t::lib::F t::lib::C t::lib::D t::lib::A t::lib::B t::lib::E) ],
-    '... got the right MRO for t::lib::F');  
-
+    [ Class::C3::calculateMRO('ClassF') ],
+    [ qw(ClassF ClassD ClassE ClassA ClassB ClassC) ],
+    '... got the right MRO for ClassF');
