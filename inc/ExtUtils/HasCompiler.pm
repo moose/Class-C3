@@ -1,5 +1,5 @@
 package ExtUtils::HasCompiler;
-$ExtUtils::HasCompiler::VERSION = '0.013';
+$ExtUtils::HasCompiler::VERSION = '0.016';
 use strict;
 use warnings;
 
@@ -10,10 +10,10 @@ our %EXPORT_TAGS = (all => \@EXPORT_OK);
 use Config;
 use Carp 'carp';
 use File::Basename 'basename';
-use File::Spec::Functions qw/catfile catdir/;
+use File::Spec::Functions qw/catfile catdir rel2abs/;
 use File::Temp qw/tempdir tempfile/;
 
-my $tempdir = tempdir(CLEANUP => 1);
+my $tempdir = tempdir('HASCOMPILERXXXX', CLEANUP => 1, DIR => '.');
 
 my $loadable_object_format = <<'END';
 #define PERL_NO_GET_CONTEXT
@@ -68,10 +68,12 @@ my %prelinking = map { $_ => 1 } qw/MSWin32 VMS aix/;
 sub can_compile_loadable_object {
 	my %args = @_;
 
+	my $output = $args{output} || \*STDOUT;
+
 	my $config = $args{config} || 'ExtUtils::HasCompiler::Config';
 	return if not $config->get('usedl');
 
-	my ($source_handle, $source_name) = tempfile(DIR => $tempdir, SUFFIX => '.c', UNLINK => 1);
+	my ($source_handle, $source_name) = tempfile('TESTXXXX', DIR => $tempdir, SUFFIX => '.c', UNLINK => 1);
 	my $basename = basename($source_name, '.c');
 
 	my $shortname = '_Loadable' . $counter++;
@@ -122,11 +124,11 @@ sub can_compile_loadable_object {
 			push @extra, qq{"-L$incdir"}, '-lperl', $perllibs;
 		}
 		push @commands, qq{$cc $ccflags $optimize "-I$incdir" $cccdlflags -c $source_name -o $object_file};
-		push @commands, qq{$cc $optimize $object_file -o $loadable_object $lddlflags @extra};
+		push @commands, qq{$ld $optimize $object_file -o $loadable_object $lddlflags @extra};
 	}
 
 	for my $command (@commands) {
-		print "$command\n" if not $args{quiet};
+		print $output "$command\n" if not $args{quiet};
 		system $command and do { carp "Couldn't execute $command: $!"; return };
 	}
 
@@ -135,7 +137,7 @@ sub can_compile_loadable_object {
 
 	require DynaLoader;
 	local @DynaLoader::dl_require_symbols = "boot_$basename";
-	my $handle = DynaLoader::dl_load_file(File::Spec->rel2abs($loadable_object), 0);
+	my $handle = DynaLoader::dl_load_file(rel2abs($loadable_object), 0);
 	if ($handle) {
 		my $symbol = DynaLoader::dl_find_symbol($handle, "boot_$basename") or do { carp "Couldn't find boot symbol for $basename"; return };
 		my $compilet = DynaLoader::dl_install_xsub('__ANON__::__ANON__', $symbol, $source_name);
@@ -171,7 +173,7 @@ ExtUtils::HasCompiler - Check for the presence of a compiler
 
 =head1 VERSION
 
-version 0.013
+version 0.016
 
 =head1 DESCRIPTION
 

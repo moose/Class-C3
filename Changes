@@ -1,5 +1,7 @@
 Revision history for Perl extension Class::C3.
 
+    - update bundled ExtUtils::HasCompiler to 0.016
+
 0.31 - 2016-04-19
     - update bundled ExtUtils::HasCompiler to 0.013 to fix possible false
       negative (RT#113635)
