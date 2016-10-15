@@ -67,7 +67,7 @@ sub is_smoker {
 
 ## BOILERPLATE ###############################################################
 require ExtUtils::MakeMaker;
-(do 'maint/Makefile.PL.include' or die $@) unless -f 'META.yml';
+(do './maint/Makefile.PL.include' or die $@) unless -f 'META.yml';
 
 # have to do this since old EUMM dev releases miss the eval $VERSION line
 my $eumm_version  = eval $ExtUtils::MakeMaker::VERSION;
