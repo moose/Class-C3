@@ -15,7 +15,7 @@ use Test::More tests => 8;
     use strict;
     use warnings;
     use Class::C3;
-    use base 'BaseTest';
+    BEGIN { our @ISA = ('BaseTest'); }
     use overload '""' => sub { ref(shift) . " stringified" },
                  fallback => 1;
 
@@ -24,7 +24,7 @@ use Test::More tests => 8;
     package InheritingFromOverloadedTest;
     use strict;
     use warnings;
-    use base 'OverloadingTest';
+    BEGIN { our @ISA = ('OverloadingTest'); }
     use Class::C3;
 
     package BaseTwo;
@@ -38,7 +38,7 @@ use Test::More tests => 8;
 
     package OverloadInheritTwo;
     use Class::C3;
-    use base qw/BaseTwo/;
+    BEGIN { our @ISA = (qw/BaseTwo/); }
 
 }
 

@@ -25,21 +25,21 @@ This tests the classic diamond inheritence pattern.
 }
 {
     package Diamond_B;
-    use base 'Diamond_A';
+    BEGIN { our @ISA = ('Diamond_A'); }
     use Class::C3;
     sub foo { 'Diamond_B::foo => ' . (shift)->next::method() }
 }
 {
     package Diamond_C;
     use Class::C3;
-    use base 'Diamond_A';
+    BEGIN { our @ISA = ('Diamond_A'); }
 
     sub hello { 'Diamond_C::hello => ' . (shift)->next::method() }
     sub foo { 'Diamond_C::foo => ' . (shift)->next::method() }
 }
 {
     package Diamond_D;
-    use base ('Diamond_B', 'Diamond_C');
+    BEGIN { our @ISA = ('Diamond_B', 'Diamond_C'); }
     use Class::C3;
 
     sub foo { 'Diamond_D::foo => ' . (shift)->next::method() }

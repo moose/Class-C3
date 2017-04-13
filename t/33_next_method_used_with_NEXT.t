@@ -23,7 +23,7 @@ BEGIN {
     use strict;
     use warnings;
     use Class::C3;
-    use base 'Foo';
+    BEGIN { our @ISA = ('Foo'); }
 
     sub foo { 'Fuz::foo => ' . (shift)->next::method }
 
@@ -31,7 +31,7 @@ BEGIN {
     use strict;
     use warnings;
     use Class::C3;
-    use base 'Foo';
+    BEGIN { our @ISA = ('Foo'); }
 
     sub foo { 'Bar::foo => ' . (shift)->next::method }
 
@@ -40,7 +40,7 @@ BEGIN {
     use warnings;
     require NEXT; # load this as late as possible so we can catch the test skip
 
-    use base 'Bar', 'Fuz';
+    BEGIN { our @ISA = ('Bar', 'Fuz'); }
 
     sub foo { 'Baz::foo => ' . (shift)->NEXT::foo }
 }

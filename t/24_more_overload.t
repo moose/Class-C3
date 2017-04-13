@@ -12,39 +12,39 @@ use Test::More tests => 3;
 
     package OverloadingTest;
     use Class::C3;
-    use base 'BaseTest';
+    BEGIN { our @ISA = ('BaseTest'); }
     use overload '+'  => sub { die "called plus operator in OT" },
                  fallback => 0;
 
     package InheritingFromOverloadedTest;
-    use base 'OverloadingTest';
+    BEGIN { our @ISA = ('OverloadingTest'); }
     use Class::C3;
     use overload '+'  => sub { die "called plus operator in IFOT" },
                  fallback => 1;
 
     package IFOTX;
     use Class::C3;
-    use base 'OverloadingTest';
+    BEGIN { our @ISA = ('OverloadingTest'); }
 
     package IFIFOT;
     use Class::C3;
-    use base 'InheritingFromOverloadedTest';
+    BEGIN { our @ISA = ('InheritingFromOverloadedTest'); }
 
     package Foo;
     use Class::C3;
-    use base 'BaseTest';
+    BEGIN { our @ISA = ('BaseTest'); }
     use overload '+'  => sub { die "called plus operator in Foo" },
                  fallback => 1;
 
     package Bar;
     use Class::C3;
-    use base 'Foo';
+    BEGIN { our @ISA = ('Foo'); }
     use overload '+'  => sub { die "called plus operator in Bar" },
                  fallback => 0;
 
     package Baz;
     use Class::C3;
-    use base 'Bar';
+    BEGIN { our @ISA = ('Bar'); }
 }
 
 Class::C3::initialize();

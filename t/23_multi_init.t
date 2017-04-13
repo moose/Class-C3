@@ -21,18 +21,18 @@ our own initialize() call from working properly.
     sub testmethod { 42 }
 
     package TestMRO::B;
-    use base 'TestMRO::A';
+    BEGIN { our @ISA = ('TestMRO::A'); }
     use Class::C3;
 
     package TestMRO::C;
-    use base 'TestMRO::A';
+    BEGIN { our @ISA = ('TestMRO::A'); }
     use Class::C3;
     sub testmethod { shift->next::method + 1 }
 
     package TestMRO::D;
     BEGIN { Class::C3::initialize }
-    use base 'TestMRO::B';
-    use base 'TestMRO::C';
+    BEGIN { our @ISA = ('TestMRO::B'); }
+    BEGIN { our @ISA = ('TestMRO::C'); }
     use Class::C3;
     sub new {
         my $class = shift;

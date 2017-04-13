@@ -12,23 +12,23 @@ This tests the use of an eval{} block to wrap a next::method call.
 =cut
 
 {
-    package A;
+    package ClassA;
     use Class::C3;
 
     sub foo {
-      die 'A::foo died';
-      return 'A::foo succeeded';
+      die 'ClassA::foo died';
+      return 'ClassA::foo succeeded';
     }
 }
 
 {
-    package B;
-    use base 'A';
+    package ClassB;
+    BEGIN { our @ISA = ('ClassA'); }
     use Class::C3;
 
     sub foo {
       eval {
-        return 'B::foo => ' . (shift)->next::method();
+        return 'ClassB::foo => ' . (shift)->next::method();
       };
 
       if ($@) {
@@ -39,8 +39,8 @@ This tests the use of an eval{} block to wrap a next::method call.
 
 Class::C3::initialize();
 
-like(B->foo,
-   qr/^A::foo died/,
+like(ClassB->foo,
+   qr/^ClassA::foo died/,
    'method resolved inside eval{}');
 
 

@@ -37,27 +37,27 @@ example taken from: L<http://gauss.gwydiondylan.org/books/drm/drm_50.html>
 
     package LifeForm;
     use Class::C3;
-    use base 'Object';
+    BEGIN { our @ISA = ('Object'); }
 
     package Sentient;
     use Class::C3;
-    use base 'LifeForm';
+    BEGIN { our @ISA = ('LifeForm'); }
 
     package BiPedal;
     use Class::C3;
-    use base 'LifeForm';
+    BEGIN { our @ISA = ('LifeForm'); }
 
     package Intelligent;
     use Class::C3;
-    use base 'Sentient';
+    BEGIN { our @ISA = ('Sentient'); }
 
     package Humanoid;
     use Class::C3;
-    use base 'BiPedal';
+    BEGIN { our @ISA = ('BiPedal'); }
 
     package Vulcan;
     use Class::C3;
-    use base ('Intelligent', 'Humanoid');
+    BEGIN { our @ISA = ('Intelligent', 'Humanoid'); }
 }
 
 Class::C3::initialize();

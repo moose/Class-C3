@@ -56,34 +56,34 @@ Level 0                0 | A |
     sub O_or_F { 'Test::O' }
 
     package Test::F;
-    use base 'Test::O';
+    BEGIN { our @ISA = ('Test::O'); }
     use Class::C3;
 
     sub O_or_F { 'Test::F' }
 
     package Test::E;
-    use base 'Test::O';
+    BEGIN { our @ISA = ('Test::O'); }
     use Class::C3;
 
     package Test::D;
-    use base 'Test::O';
+    BEGIN { our @ISA = ('Test::O'); }
     use Class::C3;
 
     sub O_or_D { 'Test::D' }
     sub C_or_D { 'Test::D' }
 
     package Test::C;
-    use base ('Test::D', 'Test::F');
+    BEGIN { our @ISA = ('Test::D', 'Test::F'); }
     use Class::C3;
 
     sub C_or_D { 'Test::C' }
 
     package Test::B;
-    use base ('Test::E', 'Test::D');
+    BEGIN { our @ISA = ('Test::E', 'Test::D'); }
     use Class::C3;
 
     package Test::A;
-    use base ('Test::B', 'Test::C');
+    BEGIN { our @ISA = ('Test::B', 'Test::C'); }
     use Class::C3;
 }
 

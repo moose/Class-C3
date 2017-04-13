@@ -32,15 +32,15 @@ eval q{
 
         package XY;
         use Class::C3;
-        use base ('X', 'Y');
+        BEGIN { our @ISA = ('X', 'Y'); }
 
         package YX;
         use Class::C3;
-        use base ('Y', 'X');
+        BEGIN { our @ISA = ('Y', 'X'); }
 
         package Z;
         eval 'use Class::C3' if $Class::C3::C3_IN_CORE;
-        use base ('XY', 'YX');
+        BEGIN { our @ISA = ('XY', 'YX'); }
     }
 
     Class::C3::initialize();

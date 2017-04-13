@@ -13,26 +13,26 @@ anonymous subroutine.
 =cut
 
 {
-    package A;
+    package ClassA;
     use Class::C3;
 
     sub foo {
-      return 'A::foo';
+      return 'ClassA::foo';
     }
 
     sub bar {
-      return 'A::bar';
+      return 'ClassA::bar';
     }
 }
 
 {
-    package B;
-    use base 'A';
+    package ClassB;
+    BEGIN { our @ISA = ('ClassA'); }
     use Class::C3;
 
     sub foo {
       my $code = sub {
-        return 'B::foo => ' . (shift)->next::method();
+        return 'ClassB::foo => ' . (shift)->next::method();
       };
       return (shift)->$code;
     }
@@ -40,7 +40,7 @@ anonymous subroutine.
     sub bar {
       my $code1 = sub {
         my $code2 = sub {
-          return 'B::bar => ' . (shift)->next::method();
+          return 'ClassB::bar => ' . (shift)->next::method();
         };
         return (shift)->$code2;
       };
@@ -50,10 +50,10 @@ anonymous subroutine.
 
 Class::C3::initialize();
 
-is(B->foo, "B::foo => A::foo",
+is(ClassB->foo, "ClassB::foo => ClassA::foo",
    'method resolved inside anonymous sub');
 
-is(B->bar, "B::bar => A::bar",
+is(ClassB->bar, "ClassB::bar => ClassA::bar",
    'method resolved inside nested anonymous subs');
 
 
