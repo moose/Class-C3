@@ -17,26 +17,26 @@ use Test::More tests => 11;
 
 {
     package Diamond_A;
-    use Class::C3; 
+    use Class::C3;
     sub hello { 'Diamond_A::hello' }
 }
 {
     package Diamond_B;
     use base 'Diamond_A';
-    use Class::C3;        
+    use Class::C3;
 }
 {
     package Diamond_C;
-    use Class::C3;    
-    use base 'Diamond_A';     
+    use Class::C3;
+    use base 'Diamond_A';
     sub goodbye { 'Diamond_C::goodbye' }
     sub hello   { 'Diamond_C::hello'   }
 }
 {
     package Diamond_D;
     use base ('Diamond_B', 'Diamond_C');
-    use Class::C3;    
-    
+    use Class::C3;
+
     our @hello = qw(h e l l o);
     our $hello = 'hello';
     our %hello = (h => 1, e => 2, l => "3 & 4", o => 5)
@@ -57,13 +57,13 @@ is(Diamond_D->goodbye, 'Diamond_D::goodbye', '... method overwritten');
 
 is($Diamond_D::hello, 'hello', '... our SCALAR package vars are here');
 is_deeply(
-    \@Diamond_D::hello, 
+    \@Diamond_D::hello,
     [ qw(h e l l o) ],
     '... our ARRAY package vars are here');
 is_deeply(
-    \%Diamond_D::hello, 
+    \%Diamond_D::hello,
     { h => 1, e => 2, l => "3 & 4", o => 5 },
-    '... our HASH package vars are here');  
+    '... our HASH package vars are here');
 
 Class::C3::uninitialize();
 
@@ -72,11 +72,11 @@ is(Diamond_D->goodbye, 'Diamond_D::goodbye', '... uninitialize does not mess wit
 
 is($Diamond_D::hello, 'hello', '... our SCALAR package vars are still here');
 is_deeply(
-    \@Diamond_D::hello, 
+    \@Diamond_D::hello,
     [ qw(h e l l o) ],
     '... our ARRAY package vars are still here');
 is_deeply(
-    \%Diamond_D::hello, 
+    \%Diamond_D::hello,
     { h => 1, e => 2, l => "3 & 4", o => 5 },
-    '... our HASH package vars are still here');    
+    '... our HASH package vars are still here');
 

@@ -16,33 +16,33 @@ BEGIN {
     use strict;
     use warnings;
     use Class::C3;
-    
+
     sub foo { 'Foo::foo' }
-    
+
     package Fuz;
     use strict;
     use warnings;
-    use Class::C3;    
+    use Class::C3;
     use base 'Foo';
 
     sub foo { 'Fuz::foo => ' . (shift)->next::method }
-        
+
     package Bar;
     use strict;
-    use warnings;    
+    use warnings;
     use Class::C3;
     use base 'Foo';
 
     sub foo { 'Bar::foo => ' . (shift)->next::method }
-    
+
     package Baz;
     use strict;
-    use warnings;    
+    use warnings;
     require NEXT; # load this as late as possible so we can catch the test skip
 
     use base 'Bar', 'Fuz';
-    
-    sub foo { 'Baz::foo => ' . (shift)->NEXT::foo }    
+
+    sub foo { 'Baz::foo => ' . (shift)->NEXT::foo }
 }
 
 Class::C3::initialize();

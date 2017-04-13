@@ -10,17 +10,17 @@ use Test::More tests => 8;
     use strict;
     use warnings;
     use Class::C3;
-    
+
     package OverloadingTest;
     use strict;
     use warnings;
     use Class::C3;
-    use base 'BaseTest';        
+    use base 'BaseTest';
     use overload '""' => sub { ref(shift) . " stringified" },
                  fallback => 1;
-    
-    sub new { bless {} => shift }    
-    
+
+    sub new { bless {} => shift }
+
     package InheritingFromOverloadedTest;
     use strict;
     use warnings;
@@ -56,8 +56,8 @@ is("$y", 'OverloadingTest stringified', '... got the right value when stringifin
 ok(($y eq 'OverloadingTest stringified'), '... eq was handled correctly');
 
 my $result;
-eval { 
-    $result = $x eq 'InheritingFromOverloadedTest stringified' 
+eval {
+    $result = $x eq 'InheritingFromOverloadedTest stringified'
 };
 ok(!$@, '... this should not throw an exception');
 ok($result, '... and we should get the true value');

@@ -8,14 +8,14 @@ use Test::More tests => 3;
 {
     package BaseTest;
     use Class::C3;
-    sub new { bless {} => shift }    
-    
+    sub new { bless {} => shift }
+
     package OverloadingTest;
     use Class::C3;
-    use base 'BaseTest';        
+    use base 'BaseTest';
     use overload '+'  => sub { die "called plus operator in OT" },
                  fallback => 0;
-    
+
     package InheritingFromOverloadedTest;
     use base 'OverloadingTest';
     use Class::C3;

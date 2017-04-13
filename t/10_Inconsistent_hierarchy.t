@@ -22,13 +22,13 @@ except TypeError:
 
 =cut
 
-eval q{ 
+eval q{
     {
         package X;
         use Class::C3;
 
         package Y;
-        use Class::C3;    
+        use Class::C3;
 
         package XY;
         use Class::C3;

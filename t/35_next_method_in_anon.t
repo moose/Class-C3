@@ -14,7 +14,7 @@ anonymous subroutine.
 
 {
     package A;
-    use Class::C3; 
+    use Class::C3;
 
     sub foo {
       return 'A::foo';
@@ -28,8 +28,8 @@ anonymous subroutine.
 {
     package B;
     use base 'A';
-    use Class::C3; 
-    
+    use Class::C3;
+
     sub foo {
       my $code = sub {
         return 'B::foo => ' . (shift)->next::method();
@@ -48,7 +48,7 @@ anonymous subroutine.
     }
 }
 
-Class::C3::initialize();  
+Class::C3::initialize();
 
 is(B->foo, "B::foo => A::foo",
    'method resolved inside anonymous sub');

@@ -19,24 +19,24 @@ Start with this:
 
 {
     package Diamond_A;
-    use Class::C3; 
+    use Class::C3;
     sub hello { 'Diamond_A::hello' }
 }
 {
     package Diamond_B;
     use base 'Diamond_A';
-    use Class::C3;        
+    use Class::C3;
 }
 {
     package Diamond_C;
-    use Class::C3;    
-    use base 'Diamond_A';     
+    use Class::C3;
+    use base 'Diamond_A';
     sub hello { 'Diamond_C::hello' }
 }
 {
     package Diamond_D;
     use base ('Diamond_B', 'Diamond_C');
-    use Class::C3;    
+    use Class::C3;
 }
 
 Class::C3::initialize();
@@ -60,8 +60,8 @@ Then change it to this:
 
 {
     package Diamond_E;
-    use Class::C3;      
-    sub hello { 'Diamond_E::hello' }      
+    use Class::C3;
+    sub hello { 'Diamond_E::hello' }
 }
 
 {

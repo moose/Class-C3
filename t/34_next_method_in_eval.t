@@ -13,7 +13,7 @@ This tests the use of an eval{} block to wrap a next::method call.
 
 {
     package A;
-    use Class::C3; 
+    use Class::C3;
 
     sub foo {
       die 'A::foo died';
@@ -24,8 +24,8 @@ This tests the use of an eval{} block to wrap a next::method call.
 {
     package B;
     use base 'A';
-    use Class::C3; 
-    
+    use Class::C3;
+
     sub foo {
       eval {
         return 'B::foo => ' . (shift)->next::method();
@@ -37,10 +37,10 @@ This tests the use of an eval{} block to wrap a next::method call.
     }
 }
 
-Class::C3::initialize();  
+Class::C3::initialize();
 
-like(B->foo, 
-   qr/^A::foo died/, 
+like(B->foo,
+   qr/^A::foo died/,
    'method resolved inside eval{}');
 
 
