@@ -1,4 +1,3 @@
-
 package Class::C3;
 
 use strict;
