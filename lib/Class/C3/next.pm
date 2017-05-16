@@ -90,9 +90,9 @@ C<maybe::next::method> in pure perl.
 
 =head1 AUTHOR
 
-Stevan Little, E<lt>stevan@iinteractive.comE<gt>
+Stevan Little, <stevan@iinteractive.com>
 
-Brandon L. Black, E<lt>blblack@gmail.comE<gt>
+Brandon L. Black, <blblack@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
