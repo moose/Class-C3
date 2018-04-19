@@ -1,5 +1,6 @@
 Revision history for Perl extension Class::C3.
 
+0.34 - 2018-04-19
     - update bundled ExtUtils::HasCompiler to 0.021
     - fix some examples in pod
 
