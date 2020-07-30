@@ -62,6 +62,7 @@ my %MM_ARGS = (
 
 sub parse_args {
   require Text::ParseWords;
+  require ExtUtils::MakeMaker;
   # copied from EUMM
   my $tmp = {};
   ExtUtils::MakeMaker::parse_args(
