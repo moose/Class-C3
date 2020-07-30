@@ -2,7 +2,6 @@ use strict;
 use warnings FATAL => 'all';
 use 5.006;
 use lib 'inc';
-use ExtUtils::HasCompiler qw(can_compile_loadable_object);
 
 my %META = (
   name => 'Class-C3',
@@ -56,10 +55,31 @@ my %MM_ARGS = (
       ? ( 'Devel::Hide' => 0 ) : ()
   },
   PREREQ_PM => {
-    ( $] < 5.009_005 and can_compile_loadable_object(quiet => 1) )
+    ( $] < 5.009_005 and want_xs() )
       ? ( 'Class::C3::XS'  => '0.13' ) : ()
   },
 );
+
+sub parse_args {
+  require Text::ParseWords;
+  # copied from EUMM
+  my $tmp = {};
+  ExtUtils::MakeMaker::parse_args(
+    $tmp,
+    Text::ParseWords::shellwords($ENV{PERL_MM_OPT} || ''),
+    @ARGV,
+  );
+  return $tmp->{ARGS} || {};
+}
+
+sub want_xs {
+  my $explicit_pp = defined $ENV{PUREPERL_ONLY} ? $ENV{PUREPERL_ONLY} : parse_args()->{PUREPERL_ONLY};
+  return !$explicit_pp
+    if defined $explicit_pp;
+
+  require ExtUtils::HasCompiler;
+  return ExtUtils::HasCompiler::can_compile_loadable_object(quiet => 1)
+}
 
 sub is_smoker {
   return ( $ENV{AUTOMATED_TESTING} && ! $ENV{PERL5_CPANM_IS_RUNNING} && ! $ENV{RELEASE_TESTING} )
