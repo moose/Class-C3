@@ -4,7 +4,7 @@ use Test::More;
 
 BEGIN {
   plan skip_all => "PP tests not applicable for this perl $]"
-    if $] > 5.009_004;
+    if "$]" > 5.009_004;
 
   plan skip_all => "All tests already executed in PP mode"
     unless eval { require Class::C3::XS };
