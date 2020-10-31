@@ -8,9 +8,6 @@ BEGIN {
 
   plan skip_all => "All tests already executed in PP mode"
     unless eval { require Class::C3::XS };
-
-  plan skip_all => "Devel::Hide required for this test"
-    unless eval { require Devel::Hide };
 }
 
 use Config;
@@ -32,7 +29,8 @@ for my $fn (@tests) {
   local $ENV{DEVEL_HIDE_VERBOSE} = 0;
   my @cmd = (
     $^X,
-    '-MDevel::Hide=Class::C3::XS',
+    '-It/lib',
+    '-MHideModule=Class::C3::XS',
     $fn
   );
 

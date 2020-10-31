@@ -50,10 +50,6 @@ my %META = (
 );
 
 my %MM_ARGS = (
-  TEST_REQUIRES => {
-    ( $] < 5.009_005 and is_smoker() )
-      ? ( 'Devel::Hide' => 0 ) : ()
-  },
   PREREQ_PM => {
     ( $] < 5.009_005 and want_xs() )
       ? ( 'Class::C3::XS'  => '0.13' ) : ()
@@ -80,10 +76,6 @@ sub want_xs {
 
   require ExtUtils::HasCompiler;
   return ExtUtils::HasCompiler::can_compile_loadable_object(quiet => 1)
-}
-
-sub is_smoker {
-  return ( $ENV{AUTOMATED_TESTING} && ! $ENV{PERL5_CPANM_IS_RUNNING} && ! $ENV{RELEASE_TESTING} )
 }
 
 ## BOILERPLATE ###############################################################
